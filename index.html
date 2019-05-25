@@ -3,28 +3,28 @@
   <head>
     <title> TO-DO AngularJS </title>
   </head>
-  <body ng-app>
-    <table ng-controller="TodoController">
-      <tr ng-repeat="task in tasks">
+  <body ng-app="TodoApp">
+    <table ng-controller="TasksController as todo">
+      <tr ng-repeat="task in todo.tasks">
         <th>{{task.title}}</th>
-        <td><button type="button" ng-click="setTaskAsCompleted($index)">Completed</button></td>
+        <td><button type="button" ng-click="todo.setTaskAsCompleted($index)">Completed</button></td> 
       </tr>
     </table>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script> 
     <script>
 
-      function TodoController ($scope) {
-        $scope.tasks = [
-          {title: "One"},
-          {title: "Two"},
-          {title: "Third"}
-        ];
+      angular.module('TodoApp', [])
+        .controller('TasksController', function() {
+          this.tasks = [
+            {title: "One"},
+            {title: "Two"},
+            {title: "Third"}
+          ];
 
-        $scope.setTaskAsCompleted = function (index) {
-          $scope.tasks.splice(index, 1);
-        }
-      }
+          this.setTaskAsCompleted = function(index) {
+            this.tasks.splice(index, 1);
+          }
+        });
 
     </script>
   </body>
